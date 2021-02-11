@@ -5,22 +5,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom'
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
+import Categories from './components/Categories'
+import Category from './components/Category'
+
+const App = props => (
+  <Router>
+    <Switch>
+      <Route exact path="/" component={Categories}/>
+      <Route path="/category/:id" component={Category}/>
+      <Route component={Categories}/>
+    </Switch>
+  </Router>
 )
-
-Hello.defaultProps = {
-  name: 'David'
-}
-
-Hello.propTypes = {
-  name: PropTypes.string
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <App/>,
     document.body.appendChild(document.createElement('div')),
   )
 })
